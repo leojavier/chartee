@@ -42,6 +42,8 @@
                 ctx.closePath();
                 
                 // Chart divisions
+                
+                
                 ctx.beginPath();
                 for(i = 1; i<=4; i++) {
                     
@@ -84,6 +86,11 @@
                 ctx.fillText('Awareness', column('first')-30, 30);
                 ctx.closePath();
                 
+                // AWARENESS LABEL
+                Chartee.utilities.shapeBuilder.rect(column('first')-50, Chartee.container.height-20, 100, 40, '#000000');
+                
+                
+                
                 // Engagement
                 ctx.beginPath();
                 ctx.font = '12px Arial';
@@ -104,6 +111,8 @@
                 ctx.fillStyle  = '#222';
                 ctx.fillText('Demand', column('fourth')-25, 30);
                 ctx.closePath();
+                
+                
                 
             }
         },
@@ -144,11 +153,6 @@
                     prop.started = true;
                 }
                 
-                    //console.log('Container Size');
-                    //console.log('Width:' + Chartee.container.width);
-                    //console.log('Height:' + Chartee.container.height);
-                    //console.log('-----------------');
-                
                 // Getting the maxumum value to Map it
                 for(item in values) {
                     if(values[item].y > maxVal) {
@@ -169,24 +173,17 @@
                 
                 for(item in values) {
                         
-                    //console.log('Item: ' + item);
                     if(values[item].y !== maxVal) {
                         values[item].y=0;
                         values[item].y = Math.abs(maxVal * (metrics[item]/100)-Chartee.container.height);
-                        //console.log('Y: ' + values[item].y + ' New value :'+ Math.abs(maxVal * (metrics[item]/100)-Chartee.container.height));
                         
                     }else{
                         
                         values[item].y = 0;
-                        //console.log('Y: ' + values[item].y + ' New value :'+ values[item].y);
                         
                     }
-                    //console.log('Proccesed Y: ' + metrics[item]);
-                    //console.log('-----------------');
                     
                 }
-                 //console.log('MAX: ' + maxVal);
-                 //console.log('EXCEDENT: ' + surPlus + '%');
                 
             },
             sizeAjustment : function(){
@@ -216,6 +213,20 @@
                     Chartee.container.width = parseInt(Chartee.container.element.getAttribute('width'));
                     Chartee.container.height = parseInt(Chartee.container.element.getAttribute('height'));
                 }
+            },
+            shapeBuilder : {
+                rect : function(x, y, width, height, strokeColor){
+                    
+                    var canvas = document.getElementById(Chartee.chartProp.target);
+                    var ctx = canvas.getContext('2d');
+                    
+                    ctx.beginPath();
+                    ctx.rect(x, y, width, height);
+                    ctx.strokeStyle = strokeColor;
+                    ctx.stroke();
+                    ctx.closePath();
+                    
+                }
             }
         }
     };
@@ -232,19 +243,19 @@
         lineWidth:1,
         coordinates:[
             {
-                y:450
+                y:1500
             },
             {
                 y:1020
             },
             {
-                y:200
-            },
-            {
-                y:2000
+                y:700
             },
             {
                 y:350
+            },
+            {
+                y:250
             }
         ]
     });
