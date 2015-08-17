@@ -1,0 +1,8 @@
+{
+  "name": "chartgenerator",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+      "underscore":"1.7.0"
+  }
+}
