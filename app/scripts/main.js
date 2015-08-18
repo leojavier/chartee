@@ -79,6 +79,19 @@
                 };
                 
                 // Division labels
+                
+                //Label sections
+                
+                var wrapper = Chartee.utilities.createHTMLElement({
+                    element: 'section',
+                    id:'label-wrapper',
+                    className: '',
+                    template: ''
+                });
+                var container = document.getElementById(Chartee.chartProp.target);
+                container.parentElement.appendChild(wrapper);
+                
+            
                 // AWARENESS
                 ctx.beginPath();
                 ctx.font = '12px Arial';
@@ -87,7 +100,17 @@
                 ctx.closePath();
                 
                 // AWARENESS LABEL
-                Chartee.utilities.shapeBuilder.rect(column('first')-50, Chartee.container.height-20, 100, 40, '#000000');
+                if(!document.getElementById('awareness-label')){
+                    
+                    Chartee.utilities.createLabel('awareness', '10.2M');
+
+                    Chartee.utilities.createLabel('Engagement', '45');
+                    
+                    Chartee.utilities.createLabel('Use', '95K');
+                    
+                    Chartee.utilities.createLabel('demand', '6.7M');
+                    
+                }
                 
                 
                 
@@ -98,12 +121,17 @@
                 ctx.fillText('Engagement', column('second')-35, 30);
                 ctx.closePath();
                 
+                
+                
                 // USE
                 ctx.beginPath();
                 ctx.font = '12px Arial';
                 ctx.fillStyle  = '#222';
                 ctx.fillText('Use', column('third')-10, 30);
                 ctx.closePath();
+                
+            
+                
                 
                 // DEMAND
                 ctx.beginPath();
@@ -112,7 +140,7 @@
                 ctx.fillText('Demand', column('fourth')-25, 30);
                 ctx.closePath();
                 
-                
+               
                 
             }
         },
@@ -227,6 +255,36 @@
                     ctx.closePath();
                     
                 }
+            },
+            createHTMLElement : function(prop){
+                
+                var element = document.createElement(prop.element);
+                element.id = prop.id;
+                element.className = prop.className;
+                element.innerHTML = prop.template;
+                
+                return element;
+                
+            },
+            createLabel : function(field,value){
+                var elementWrapper = Chartee.utilities.createHTMLElement({
+                    element: 'div',
+                    id: field + '-label-wrapper',
+                    className: 'label col-lg-3 col-md-3 col-sm-3 col-xs-3 ',
+                    template: ''
+                });
+                var container = document.getElementById('label-wrapper');
+                container.appendChild(elementWrapper);
+                
+                var element = Chartee.utilities.createHTMLElement({
+                    element: 'div',
+                    id: field + '-label',
+                    className: 'stroke-chart-label',
+                    template: '<p>'+value+'</p>'
+                });
+                
+                container =  document.getElementById(field + '-label-wrapper');
+                container.appendChild(element);
             }
         }
     };
